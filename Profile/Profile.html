@@ -183,8 +183,15 @@
       const urlParams = new URLSearchParams(window.location.search);
       const userId = urlParams.get('user_id');
       const username = urlParams.get('username');
-      console.log(`User ID: ${userId}, Username: ${username}`);
-        document.getElementById('username').textContent = username || "Гость";
+
+      if (userId && username) {
+        console.log(`User ID: ${userId}, Username: ${username}`);
+        document.getElementById('username').textContent = username;
+      } else {
+        // Handle case where parameters are missing
+        console.log("User data not found in URL");
+        document.getElementById('username').textContent = "Гость";
+      }
     </script>
     </body>
 </html>
