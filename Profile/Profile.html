@@ -135,11 +135,6 @@
     </style>
     </head>
     <body>
-    <script>
-      const tg = window.Telegram.WebApp;
-      const username = tg.initDataUnsafe.user?.username;
-      document.getElementById('username').textContent = username || "Гость";
-    </script>
     <h1 style="margin-top: 60px">Ваш профиль</h1>
     <div class="avatar-nick-container">
       <img src="./img/Profile-avatar.png" />
@@ -184,6 +179,11 @@
         <p style="margin-bottom: 7px; color: rgb(0, 153, 255)">Профиль</p>
       </a>
     </div>
+    <script>
+      const tg = window.Telegram.WebApp;
+      const username = tg.initDataUnsafe.user?.username;
+      document.getElementById('username').textContent = username || "Гость";
+    </script>
     </body>
-
+</html>
 

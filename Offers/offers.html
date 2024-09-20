@@ -261,11 +261,6 @@
     </style>
   </head>
   <body>
-  <script>
-    const tg = window.Telegram.WebApp;
-    const username = tg.initDataUnsafe.user?.username;
-    document.getElementById('username').textContent = username || "Гость";
-  </script>
   <div class="account-container">
     <div class="avatar-container">
       <img src="./img/avatar.png" />
@@ -408,5 +403,10 @@
         <p style="margin-bottom: 7px">Профиль</p>
       </a>
     </div>
+  <script>
+    const tg = window.Telegram.WebApp;
+    const username = tg.initDataUnsafe.user?.username;
+    document.getElementById('username').textContent = username || "Гость";
+  </script>
   </body>
 </html>
