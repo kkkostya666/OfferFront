@@ -181,14 +181,17 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      const userId = urlParams.get('user_id');
-      const username = urlParams.get('username');
+      const encodedData = urlParams.get('data');
 
-      if (userId && username) {
+      if (encodedData) {
+        const userData = JSON.parse(encodedData);
+        const userId = userData.user_id;
+        const username = userData.username;
+
         console.log(`User ID: ${userId}, Username: ${username}`);
         document.getElementById('username').textContent = username;
       } else {
-        // Handle case where parameters are missing
+        // Handle case where data is missing
         console.log("User data not found in URL");
         document.getElementById('username').textContent = "Гость";
       }
