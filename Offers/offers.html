@@ -10,7 +10,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
-        const username = tg.initDataUnsafe.user?.id || "Гость"; // Если нет username, отображаем "Гость"
+        const username = tg.initDataUnsafe.user?.username || "Гость"; // Если нет username, отображаем "Гость"
         document.getElementById('username').textContent = username;
     </script>
     <title>Offers</title>
