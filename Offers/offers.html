@@ -25,20 +25,51 @@
           if (response.ok) {
             let data = await response.json();
 
-            // Assuming the API returns an array of offers or similar structured data
-            let offerCount = data.length;
-            let username = data.user?.username || "Гость"; // Check if username exists
+            // Get the user's username and offers
+            let username = tg.initDataUnsafe.user?.username || "Гость";
+            let offers = data;
 
-            // Update the HTML elements with real data
+            // Update username and offer count
             document.getElementById('username').textContent = username;
-            document.querySelector('.offers-count').textContent = `Офферов: ${offerCount}`;
+            document.querySelector('.offers-count').textContent = `Офферов: ${offers.length}`;
 
-            // Update other parts of the page as needed
-            // Example: Update each offer's details
-            // data.forEach((offer, index) => {
-            //   document.querySelector(`.offer-title-${index}`).textContent = offer.title;
-            //   document.querySelector(`.offer-details-${index}`).textContent = offer.details;
-            // });
+            // Update the offers in the DOM
+            const offerContainer = document.querySelector('.Offer-info-container');
+            offerContainer.innerHTML = ''; // Clear existing offers
+
+            offers.forEach((offer, index) => {
+              let offerHTML = `
+            <div class="Offer-info-title">
+              <p>Оффер #${index + 1}: ${offer.offer_theme}</p>
+              <a href="https://t.me/pspconnect" class="contact-with-us-offer">
+                <img src="./img/headphones.png" />Связаться
+              </a>
+            </div>
+            <div class="Offer-info">
+              <p class="gray">ГЕО и решения: ${offer.geosolutionsinput}</p>
+              <p class="Offer-info-right">${offer.geo_data}</p>
+            </div>
+            <div class="Offer-info">
+              <p class="gray">Проценты на каждый ГЕО</p>
+              <div class="Offer-info-right">
+                <div class="geo-percents-offer">
+                  <p>Crypto Acceptance: ${offer.crypto_acceptance}</p>
+                </div>
+                <div class="geo-percents-offer">
+                  <p>Referral System: ${offer.referral_system}</p>
+                </div>
+                <div class="geo-percents-offer">
+                  <p>Withdrawal Deadlines: ${offer.withdrawal_deadlines}</p>
+                </div>
+              </div>
+            </div>
+            <div class="Offer-info-without-border">
+              <p class="gray">Проект: ${offer.project}</p>
+              <p class="Offer-info-right">Status: ${offer.status}</p>
+            </div>
+          `;
+              offerContainer.insertAdjacentHTML('beforeend', offerHTML);
+            });
 
           } else {
             console.error("Error fetching data: " + response.status);
@@ -48,7 +79,6 @@
         }
       }
 
-      // Call the fetchData function to load data on page load
       window.onload = fetchData;
     </script>
     <title>Offers</title>
