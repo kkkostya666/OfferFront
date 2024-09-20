@@ -7,6 +7,7 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Offers</title>
     <style>
       @font-face {
@@ -264,7 +265,7 @@
       <div class="avatar-container">
         <img src="./img/avatar.png" />
         <div class="acc-data">
-          <p class="acc-name">RenatGen</p>
+          <p class="username"></p>
           <p class="offers-count">Офферов: 3</p>
         </div>
       </div>
@@ -403,9 +404,12 @@
       </a>
     </div>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
       let tg = window.Telegram.WebApp;
+      const username = tg.initDataUnsafe.user?.username || "Гость"; // Если нет username, вывести "Гость"
+
+      // Обновляем содержимое элемента с id "username"
+      document.getElementById('username').textContent = username;
     </script>
   </body>
 </html>
