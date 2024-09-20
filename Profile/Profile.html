@@ -186,5 +186,17 @@
       console.log("Username найден:",  document.getElementById('username').textContent = tg.initDataUnsafe.user?.username || "Гость");
     </script>
     </body>
+  <div id="log"></div>
+  <script>
+    const log = (message) => {
+      document.getElementById('log').innerText += message + '\n';
+    };
+
+    const tg = window.Telegram.WebApp;
+    tg.ready().then(() => {
+      const username = tg.initDataUnsafe.user?.username;
+      log('Username: ' + (username || "Гость"));
+    });
+  </script>
 </html>
 
