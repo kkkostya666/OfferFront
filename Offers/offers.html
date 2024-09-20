@@ -9,9 +9,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        let tg = window.Telegram.WebApp;
-        const username = tg.initDataUnsafe.user?.username || "Гость"; // Если нет username, отображаем "Гость"
-        document.getElementById('username').textContent = username;
+      // Initialize Telegram WebApp
+      let tg = window.Telegram.WebApp;
+
+      // Get the user ID from the Telegram WebApp data
+      const userId = tg.initDataUnsafe.user?.id;
+
+      // Define the API endpoint with the dynamic user_id
+      const apiUrl = `http://95.163.228.107/api/group/${userId}`;
+
+      // Fetch data from the API
+      async function fetchData() {
+        try {
+          let response = await fetch(apiUrl);
+          if (response.ok) {
+            let data = await response.json();
+
+            // Assuming the API returns an array of offers or similar structured data
+            let offerCount = data.length;
+            let username = data.user?.username || "Гость"; // Check if username exists
+
+            // Update the HTML elements with real data
+            document.getElementById('username').textContent = username;
+            document.querySelector('.offers-count').textContent = `Офферов: ${offerCount}`;
+
+            // Update other parts of the page as needed
+            // Example: Update each offer's details
+            // data.forEach((offer, index) => {
+            //   document.querySelector(`.offer-title-${index}`).textContent = offer.title;
+            //   document.querySelector(`.offer-details-${index}`).textContent = offer.details;
+            // });
+
+          } else {
+            console.error("Error fetching data: " + response.status);
+          }
+        } catch (error) {
+          console.error("Fetch error: ", error);
+        }
+      }
+
+      // Call the fetchData function to load data on page load
+      window.onload = fetchData;
     </script>
     <title>Offers</title>
     <style>
@@ -270,12 +308,12 @@
     <div class="avatar-container">
       <img src="./img/avatar.png" />
       <div class="acc-data">
-        <p id="username"></p>
-        <p class="offers-count">Офферов: 3</p>
+        <p id="username"></p> <!-- Username will be updated here -->
+        <p class="offers-count"></p> <!-- Offer count will be updated here -->
       </div>
     </div>
   </div>
-    <div class="Offers-Page-titles-container">
+  <div class="Offers-Page-titles-container">
       <h1 class="Offers-Page-title">Офферы для PSP</h1>
       <h3 class="Offers-Page-undertitle">
         Просматривайте офферы или добавьте свой
