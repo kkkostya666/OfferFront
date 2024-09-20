@@ -7,7 +7,6 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Vacancies</title>
     <style>
       @font-face {
@@ -179,13 +178,13 @@
         <p style="margin-bottom: 7px; color: rgb(0, 153, 255)">Профиль</p>
       </a>
     </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
       const tg = window.Telegram.WebApp;
       console.log(tg)
       const user = tg.initDataUnsafe;
       console.log(user)
       document.getElementById('username').textContent = user.username;
-
     </script>
     </body>
 </html>
