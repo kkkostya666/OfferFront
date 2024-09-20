@@ -182,8 +182,7 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const tg = window.Telegram.WebApp;
-
-        // Получите данные о пользователе
+        console.log(tg.initDataUnsafe);
         const userData = tg.initDataUnsafe.user;
         console.log(userData);
         document.getElementById('username').textContent = userData?.username || "Гость";
