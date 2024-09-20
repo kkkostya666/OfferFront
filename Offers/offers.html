@@ -8,11 +8,6 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-      const tg = window.Telegram.WebApp;
-      const username = tg.initDataUnsafe.user?.id;
-      document.getElementById('username').textContent = username ? username : "Гость";
-    </script>
     <title>Offers</title>
     <style>
       @font-face {
@@ -266,6 +261,11 @@
     </style>
   </head>
   <body>
+  <script>
+    const tg = window.Telegram.WebApp;
+    const username = tg.initDataUnsafe.user?.username;
+    document.getElementById('username').textContent = username || "Гость";
+  </script>
   <div class="account-container">
     <div class="avatar-container">
       <img src="./img/avatar.png" />
