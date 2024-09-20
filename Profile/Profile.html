@@ -11,8 +11,16 @@
     <script>
       window.onload = function() {
         let tg = window.Telegram.WebApp;
-        console.log(tg.initDataUnsafe);
-        document.getElementById('username').textContent = tg.initDataUnsafe.user?.username || "Гость";
+        console.log(tg.initDataUnsafe); // Выводим объект, чтобы убедиться, что данные загружены
+        const username = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.username : "Гость";
+
+        if (username) {
+          console.log("Username найден:", username);
+          document.getElementById('username').textContent = username;
+        } else {
+          console.log("Username не найден, отображаем 'Гость'");
+          document.getElementById('username').textContent = "Гость";
+        }
       };
     </script>
     <title>Vacancies</title>
