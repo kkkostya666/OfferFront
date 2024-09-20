@@ -7,12 +7,6 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-      const tg = window.Telegram.WebApp;
-      const username = tg.initDataUnsafe.user?.username;
-      document.getElementById('username').textContent = username ? username : "Гость";
-    </script>
     <title>Vacancies</title>
     <style>
       @font-face {
@@ -140,6 +134,12 @@
     </style>
     </head>
     <body>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+      const tg = window.Telegram.WebApp;
+      const username = tg.initDataUnsafe.user?.username;
+      document.getElementById('username').textContent = username ? username : "Гость";
+    </script>
     <h1 style="margin-top: 60px">Ваш профиль</h1>
     <div class="avatar-nick-container">
       <img src="./img/Profile-avatar.png" />
