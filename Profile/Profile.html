@@ -180,16 +180,11 @@
       </a>
     </div>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        if (window.Telegram && window.Telegram.WebApp) {
-          const tg = window.Telegram.WebApp;
-          console.log(tg.initDataUnsafe);
-          const username = tg.initDataUnsafe.user?.username;
-          document.getElementById('username').textContent = username || "Гость";
-        } else {
-          console.error("Telegram Web App SDK не загружен.");
-        }
-      });
+      const tg = window.Telegram.WebApp;
+      const user = tg.initDataUnsafe.user;
+      console.log(user)
+      document.getElementById('username').textContent = user.username;
+
     </script>
     </body>
 </html>

@@ -405,11 +405,9 @@
     </div>
   <script>
     const tg = window.Telegram.WebApp;
-    tg.ready().then(() => {
-      console.log(tg.initDataUnsafe);
-      const username = tg.initDataUnsafe.user?.username;
-      document.getElementById('username').textContent = username || "Гость";
-    });
+    const user = tg.initDataUnsafe.user;
+    console.log(user)
+    document.getElementById('username').textContent = user.username;
   </script>
   </body>
 </html>
