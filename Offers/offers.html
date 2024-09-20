@@ -9,11 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      window.onload = function() {
+      window.addEventListener('load', function() {
         let tg = window.Telegram.WebApp;
-        console.log(tg.initDataUnsafe);
-        document.getElementById('username').textContent = tg.initDataUnsafe.user?.username || "Гость";
-      };
+
+        const checkInitData = setInterval(() => {
+          if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            clearInterval(checkInitData);
+            console.log(tg.initDataUnsafe);
+            const username = tg.initDataUnsafe.user.username;
+            document.getElementById('username').textContent = username || "Гость";
+          }
+        }, 100); // Проверка каждые 100мс
+      });
     </script>
     <title>Offers</title>
     <style>
