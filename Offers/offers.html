@@ -9,15 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Инициализация объекта Telegram WebApp
         let tg = window.Telegram.WebApp;
-
-        const username = tg.initDataUnsafe.user?.username || "Гость"; // Если нет username, отображаем "Гость"
-
-        // Обновляем элемент на странице с id "username"
+        const username = tg.initDataUnsafe.user?.id || "Гость"; // Если нет username, отображаем "Гость"
         document.getElementById('username').textContent = username;
-      });
     </script>
     <title>Offers</title>
     <style>
