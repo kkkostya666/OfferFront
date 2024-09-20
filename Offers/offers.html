@@ -9,77 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      // Initialize Telegram WebApp
-      let tg = window.Telegram.WebApp;
-
-      // Get the user ID from the Telegram WebApp data
-      const userId = tg.initDataUnsafe.user?.id;
-
-      // Define the API endpoint with the dynamic user_id
-      const apiUrl = `http://95.163.228.107/api/group/${userId}`;
-
-      // Fetch data from the API
-      async function fetchData() {
-        try {
-          let response = await fetch(apiUrl);
-          if (response.ok) {
-            let data = await response.json();
-
-            // Get the user's username and offers
-            let username = tg.initDataUnsafe.user?.username || "Гость";
-            let offers = data;
-
-            // Update username and offer count
-            document.getElementById('username').textContent = username;
-            document.querySelector('.offers-count').textContent = `Офферов: ${offers.length}`;
-
-            // Update the offers in the DOM
-            const offerContainer = document.querySelector('.Offer-info-container');
-            offerContainer.innerHTML = ''; // Clear existing offers
-
-            offers.forEach((offer, index) => {
-              let offerHTML = `
-            <div class="Offer-info-title">
-              <p>Оффер #${index + 1}: ${offer.offer_theme}</p>
-              <a href="https://t.me/pspconnect" class="contact-with-us-offer">
-                <img src="./img/headphones.png" />Связаться
-              </a>
-            </div>
-            <div class="Offer-info">
-              <p class="gray">ГЕО и решения: ${offer.geosolutionsinput}</p>
-              <p class="Offer-info-right">${offer.geo_data}</p>
-            </div>
-            <div class="Offer-info">
-              <p class="gray">Проценты на каждый ГЕО</p>
-              <div class="Offer-info-right">
-                <div class="geo-percents-offer">
-                  <p>Crypto Acceptance: ${offer.crypto_acceptance}</p>
-                </div>
-                <div class="geo-percents-offer">
-                  <p>Referral System: ${offer.referral_system}</p>
-                </div>
-                <div class="geo-percents-offer">
-                  <p>Withdrawal Deadlines: ${offer.withdrawal_deadlines}</p>
-                </div>
-              </div>
-            </div>
-            <div class="Offer-info-without-border">
-              <p class="gray">Проект: ${offer.project}</p>
-              <p class="Offer-info-right">Status: ${offer.status}</p>
-            </div>
-          `;
-              offerContainer.insertAdjacentHTML('beforeend', offerHTML);
-            });
-
-          } else {
-            console.error("Error fetching data: " + response.status);
-          }
-        } catch (error) {
-          console.error("Fetch error: ", error);
-        }
-      }
-
-      window.onload = fetchData;
+      window.onload = function() {
+        let tg = window.Telegram.WebApp;
+        console.log(tg.initDataUnsafe);
+        document.getElementById('username').textContent = tg.initDataUnsafe.user?.id || "Гость";
+      };
     </script>
     <title>Offers</title>
     <style>
@@ -338,12 +272,12 @@
     <div class="avatar-container">
       <img src="./img/avatar.png" />
       <div class="acc-data">
-        <p id="username"></p> <!-- Username will be updated here -->
-        <p class="offers-count"></p> <!-- Offer count will be updated here -->
+        <p id="username"></p>
+        <p class="offers-count">Офферов: 3</p>
       </div>
     </div>
   </div>
-  <div class="Offers-Page-titles-container">
+    <div class="Offers-Page-titles-container">
       <h1 class="Offers-Page-title">Офферы для PSP</h1>
       <h3 class="Offers-Page-undertitle">
         Просматривайте офферы или добавьте свой
