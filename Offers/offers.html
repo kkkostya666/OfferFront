@@ -409,7 +409,7 @@
     const user_id = tg.initDataUnsafe.user.id;
     console.log(user)
     document.getElementById('username').textContent = user;
-    fetch(`http://95.163.228.107/api/group/${user_id}`)
+    fetch(`https://95.163.228.107/api/group/${user_id}`)
             .then(response => response.json())
             .then(data => {
               const groupCount = data.length;
