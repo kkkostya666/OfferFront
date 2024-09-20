@@ -406,9 +406,7 @@
 
     <script>
       let tg = window.Telegram.WebApp;
-      const username = tg.initDataUnsafe.user?.username || "Гость"; // Если нет username, вывести "Гость"
-      console.log(tg.initDataUnsafe.user);
-
+      const username = tg.initDataUnsafe.user.username || "Гость"; // Если нет username, вывести "Гость"
       document.getElementById('username').textContent = username;
     </script>
   </body>
