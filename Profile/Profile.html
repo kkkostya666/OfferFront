@@ -180,21 +180,10 @@
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const encodedData = urlParams.get('data');
-
-      if (encodedData) {
-        const userData = JSON.parse(encodedData);
-        const userId = userData.user_id;
-        const username = userData.username;
-
-        console.log(`User ID: ${userId}, Username: ${username}`);
-        document.getElementById('username').textContent = username;
-      } else {
-        // Handle case where data is missing
-        console.log("User data not found in URL");
-        document.getElementById('username').textContent = "Гость";
-      }
+      const tg = window.Telegram.WebApp;
+      const user = tg.initDataUnsafe;
+      console.log(user)
+      document.getElementById('username').textContent = user.username;
     </script>
     </body>
 </html>
