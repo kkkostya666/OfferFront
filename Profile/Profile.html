@@ -181,8 +181,9 @@
     </div>
     <script>
       const tg = window.Telegram.WebApp;
-      const username = tg.initDataUnsafe.user?.username;
-      document.getElementById('username').textContent = username || "Гость";
+      console.log("Username найден:", tg);
+      document.getElementById('username').textContent = tg.initDataUnsafe.user?.username || "Гость";
+      console.log("Username найден:",  document.getElementById('username').textContent = tg.initDataUnsafe.user?.username || "Гость");
     </script>
     </body>
 </html>
