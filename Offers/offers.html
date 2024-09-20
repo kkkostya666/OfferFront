@@ -12,7 +12,7 @@
       window.onload = function() {
         let tg = window.Telegram.WebApp;
         console.log(tg.initDataUnsafe);
-        document.getElementById('username').textContent = tg.initDataUnsafe.user?.id || "Гость";
+        document.getElementById('username').textContent = tg.initDataUnsafe.user?.username || "Гость";
       };
     </script>
     <title>Offers</title>
