@@ -180,11 +180,17 @@
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      const tg = window.Telegram.WebApp;
-      console.log(tg)
-      const user = tg.initDataUnsafe;
-      console.log(user)
-      document.getElementById('username').textContent = user.username;
+      document.addEventListener("DOMContentLoaded", function() {
+        const tg = window.Telegram.WebApp;
+
+        // Получите данные о пользователе
+        const userData = tg.initDataUnsafe.user;
+        console.log(userData);
+        document.getElementById('username').textContent = userData?.username || "Гость";
+
+        // Обработка ответа из бота
+        // Вы можете отобразить данные или обработать их
+      });
     </script>
     </body>
 </html>
