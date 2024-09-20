@@ -8,6 +8,17 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Инициализация объекта Telegram WebApp
+        let tg = window.Telegram.WebApp;
+
+        const username = tg.initDataUnsafe.user?.username || "Гость"; // Если нет username, отображаем "Гость"
+
+        // Обновляем элемент на странице с id "username"
+        document.getElementById('username').textContent = username;
+      });
+    </script>
     <title>Offers</title>
     <style>
       @font-face {
@@ -403,11 +414,5 @@
         <p style="margin-bottom: 7px">Профиль</p>
       </a>
     </div>
-
-    <script>
-      let tg = window.Telegram.WebApp;
-      const username = tg.initDataUnsafe.user.username || "Гость"; // Если нет username, вывести "Гость"
-      document.getElementById('username').textContent = username;
-    </script>
   </body>
 </html>
