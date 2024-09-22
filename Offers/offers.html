@@ -353,33 +353,47 @@
                     const offerElement = document.createElement('div');
                     offerElement.classList.add('Offer-info-container');
 
+                    // Разделяем geo_data
+                    const geoData = offer.geo_data ? offer.geo_data.split(',') : [];
+                    const geoBlocks = geoData.map(geo => {
+                      const geoParts = geo.trim().split(' ');
+
+                      // Парсим и разбираем данные (зависит от формата)
+                      const currency = geoParts[0]; // Валюта или GEO (например, Rub)
+                      const payIn = geoParts[geoParts.length - 2]; // PAY-IN процент
+                      const payOut = geoParts[geoParts.length - 1]; // PAY-OUT процент
+
+                      return `
+                    <div class="geo-percents-offer">
+                        <p>${currency}</p>
+                        <p>PAY-IN - ${payIn || 'N/A'}%</p>
+                        <p>PAY-OUT - ${payOut || 'N/A'}%</p>
+                    </div>
+                `;
+                    }).join(''); // Объединяем массив блоков в строку
+
                     offerElement.innerHTML = `
-              <div class="Offer-info-container">
                 <div class="Offer-info-title">
-                  <p>Оффер #{offer.id}</p>
-                  <a href="" class="contact-with-us-offer"
-                    ><img src="./img/headphones.png"  alt=""/>Связаться</a
-                  >
+                    <p>Оффер #${offer.id}</p>
+                    <a href="https://t.me/pspconnect" class="contact-with-us-offer">
+                        <img src="./img/headphones.png" />Связаться
+                    </a>
                 </div>
                 <div class="Offer-info">
-                    <p class="gray">ГЕО и решения (E-COM, P2P)</p>
-                    <p class="Offer-info-right">${offer.geosolutionsinput || 'ГЕО не указано'}</p>
+                    <p class="gray">ГЕО и решения: ${offer.geo_data || 'ГЕО не указано'}</p>
                 </div>
                 <div class="Offer-info">
                     <p class="gray">Проценты на каждый ГЕО</p>
                     <div class="Offer-info-right">
-                        <div class="geo-percents-offer">
-                            <p>${offer.geo_data}</p>
-                            <p>PAY-IN: ${offer.processing_primary_traffic || 'N/A'}</p>
-                            <p>PAY-OUT: ${offer.withdrawal_deadlines || 'N/A'}</p>
-                        </div>
+                        ${geoBlocks} <!-- Вставляем динамически созданные блоки -->
                     </div>
                 </div>
                 <div class="Offer-info-without-border">
                     <p class="gray">Какие проекты подключаете</p>
                     <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
                 </div>
-        `;
+            `;
+
                     offerContainer.appendChild(offerElement);
                   });
                 })
