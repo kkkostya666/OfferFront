@@ -413,9 +413,42 @@
             .then(data => {
               const groupCount = data.length;
               console.log(data)
-              document.getElementById('offers-count').textContent = `Офферов: ${groupCount}`;
-            }
-            )
+              offerContainer.innerHTML = '';
+
+              data.forEach(offer => {
+                const offerElement = document.createElement('div');
+                offerElement.classList.add('Offer-info-container');
+
+                // Заголовок оффера
+                offerElement.innerHTML = `
+          <div class="Offer-info-title">
+            <p>Оффер #${offer.id}</p>
+            <a href="https://t.me/pspconnect" class="contact-with-us-offer">
+              <img src="./img/headphones.png" />Связаться
+            </a>
+          </div>
+          <div class="Offer-info">
+            <p class="gray">Тема оффера: ${offer.offer_theme}</p>
+            <p class="Offer-info-right">${offer.geo_coverage || 'ГЕО не указано'}</p>
+          </div>
+          <div class="Offer-info">
+            <p class="gray">Реферальная система: ${offer.referral_system}</p>
+            <p class="Offer-info-right">Криптовалюта: ${offer.crypto_acceptance}</p>
+          </div>
+          <div class="Offer-info-without-border">
+            <p class="gray">Тип трафика</p>
+            <p class="Offer-info-right">${offer.processing_primary_traffic}</p>
+          </div>
+        `;
+
+                // Добавляем созданный элемент в контейнер
+                offerContainer.appendChild(offerElement);
+              });
+
+              // Вывести количество офферов
+              document.getElementById('offers-count').textContent = `Офферов: ${data.length}`;
+            })
+            .catch(error => console.error('Ошибка при загрузке данных:', error));
   </script>
   </body>
 </html>
