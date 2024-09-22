@@ -267,7 +267,6 @@
   </head>
   <body>
   <div class="account-container">
-    <div id="offer-container"></div>
     <div class="avatar-container">
       <img src="./img/avatar.png" />
       <div class="acc-data">
@@ -282,7 +281,8 @@
         Просматривайте офферы или добавьте свой
       </h3>
     </div>
-    <div class="Offers-Page-mainInfo-container">
+  <div id="offer-container"></div>
+  <div class="Offers-Page-mainInfo-container">
       <div class="Offers-Page-helpButtons-container">
         <a href="../AddOffer/addOffer.html" class="Offers-Page-helpButton">
           +
@@ -354,34 +354,37 @@
                     offerElement.classList.add('Offer-info-container');
 
                     offerElement.innerHTML = `
-            <div class="Offer-info-title">
-                <p>Оффер #${offer.id}</p>
-                <a href="https://t.me/pspconnect" class="contact-with-us-offer">
-                    <img src="./img/headphones.png" />Связаться
-                </a>
-              </div>
+              <div class="Offer-info-container">
+                <div class="Offer-info-title">
+                  <p>Оффер #{offer.id}</p>
+                  <a href="" class="contact-with-us-offer"
+                    ><img src="./img/headphones.png"  alt=""/>Связаться</a
+                  >
+                </div>
                 <div class="Offer-info">
-                    <p class="gray">ГЕО и решения: ${offer.geo_data || 'ГЕО не указано'}</p>
-              </div>
-              <div class="Offer-info">
-                  <p class="gray">Проценты на каждый ГЕО</p>
-                  <div class="Offer-info-right">
-                      <div class="geo-percents-offer">
-                          <p>${offer.geo_data}</p>
-                          <p>PAY-IN: ${offer.processing_primary_traffic || 'N/A'}</p>
-                          <p>PAY-OUT: ${offer.withdrawal_deadlines || 'N/A'}</p>
-                      </div>
-                  </div>
-              </div>
-              <div class="Offer-info-without-border">
-                  <p class="gray">Какие проекты подключаете</p>
-                  <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
-              </div>
+                    <p class="gray">ГЕО и решения (E-COM, P2P)</p>
+                    <p class="Offer-info-right">${offer.geosolutionsinput || 'ГЕО не указано'}</p>
+                </div>
+                <div class="Offer-info">
+                    <p class="gray">Проценты на каждый ГЕО</p>
+                    <div class="Offer-info-right">
+                        <div class="geo-percents-offer">
+                            <p>${offer.geo_data}</p>
+                            <p>PAY-IN: ${offer.processing_primary_traffic || 'N/A'}</p>
+                            <p>PAY-OUT: ${offer.withdrawal_deadlines || 'N/A'}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Offer-info-without-border">
+                    <p class="gray">Какие проекты подключаете</p>
+                    <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
+                </div>
         `;
                     offerContainer.appendChild(offerElement);
                   });
                 })
                 .catch(error => console.error('Ошибка при загрузке данных:', error));
       </script>
+  </div>
   </body>
 </html>
