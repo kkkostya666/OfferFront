@@ -215,6 +215,12 @@
         }
       }
 
+      #offer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Выровнять офферы по центру */
+      }
+
       .contact-with-us-offer {
         display: flex;
         gap: 5px;
@@ -323,64 +329,59 @@
       </a>
     </div>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    const tg = window.Telegram.WebApp;
-    const user = tg.initDataUnsafe.user.username;
-    console.log(user);
-    document.getElementById('username').textContent = user;
+      <script src="https://telegram.org/js/telegram-web-app.js"></script>
+      <script>
+        const tg = window.Telegram.WebApp;
+        const user = tg.initDataUnsafe.user.username;
+        console.log(user);
+        document.getElementById('username').textContent = user;
 
-    fetch(`https://pspconnect.org/api/group/`)
-            .then(response => response.json())
-            .then(responseData => {
-              const data = responseData.data;
+        fetch(`https://pspconnect.org/api/group/`)
+                .then(response => response.json())
+                .then(responseData => {
+                  const data = responseData.data;
 
-              if (!Array.isArray(data)) {
-                console.error('Ожидается массив данных, получен другой формат:', data);
-                return;
-              }
+                  if (!Array.isArray(data)) {
+                    console.error('Ожидается массив данных, получен другой формат:', data);
+                    return;
+                  }
 
-              const offerContainer = document.getElementById('offer-container');
-              offerContainer.innerHTML = '';
+                  const offerContainer = document.getElementById('offer-container');
+                  offerContainer.innerHTML = '';
 
-              data.forEach(offer => {
-                const offerElement = document.createElement('div');
-                offerElement.classList.add('Offer-info-container');
+                  data.forEach(offer => {
+                    const offerElement = document.createElement('div');
+                    offerElement.classList.add('Offer-info-container');
 
-                offerElement.innerHTML = `
-                    <div class="Offer-info-title">
-                        <p>Оффер #${offer.id}</p>
-                        <a href="https://t.me/pspconnect" class="contact-with-us-offer">
-                            <img src="./img/headphones.png" />Связаться
-                        </a>
+                    offerElement.innerHTML = `
+            <div class="Offer-info-title">
+                <p>Оффер #${offer.id}</p>
+                <a href="https://t.me/pspconnect" class="contact-with-us-offer">
+                    <img src="./img/headphones.png" />Связаться
+                </a>
+              </div>
+                <div class="Offer-info">
+                    <p class="gray">ГЕО и решения: ${offer.geo_data || 'ГЕО не указано'}</p>
+              </div>
+              <div class="Offer-info">
+                  <p class="gray">Проценты на каждый ГЕО</p>
+                  <div class="Offer-info-right">
+                      <div class="geo-percents-offer">
+                          <p>${offer.geo_data}</p>
+                          <p>PAY-IN: ${offer.processing_primary_traffic || 'N/A'}</p>
+                          <p>PAY-OUT: ${offer.withdrawal_deadlines || 'N/A'}</p>
                       </div>
-                        <div class="Offer-info">
-                            <p class="gray">ГЕО и решения: ${offer.geo_data || 'ГЕО не указано'}</p>
-                      </div>
-                      <div class="Offer-info">
-                          <p class="gray">Проценты на каждый ГЕО</p>
-                          <div class="Offer-info-right">
-                              <div class="geo-percents-offer">
-                                  <p>${offer.geo_data}</p>
-                                  <p>PAY-IN: ${offer.processing_primary_traffic || 'N/A'}</p>
-                                  <p>PAY-OUT: ${offer.withdrawal_deadlines || 'N/A'}</p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="Offer-info-without-border">
-                          <p class="gray">Какие проекты подключаете</p>
-                          <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
-                      </div>
-                `;
-
-                offerContainer.appendChild(offerElement);
-              });
-
-              // Вывести количество офферов
-              document.getElementById('offers-count').textContent = `Офферов: ${data.length}`;
-            })
-            .catch(error => console.error('Ошибка при загрузке данных:', error));
-  </script>
-
+                  </div>
+              </div>
+              <div class="Offer-info-without-border">
+                  <p class="gray">Какие проекты подключаете</p>
+                  <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
+              </div>
+        `;
+                    offerContainer.appendChild(offerElement);
+                  });
+                })
+                .catch(error => console.error('Ошибка при загрузке данных:', error));
+      </script>
   </body>
 </html>
