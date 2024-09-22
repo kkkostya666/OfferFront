@@ -406,10 +406,9 @@
   <script>
     const tg = window.Telegram.WebApp;
     const user = tg.initDataUnsafe.user.username;
-    const user_id = tg.initDataUnsafe.user.id;
     console.log(user)
     document.getElementById('username').textContent = user;
-    fetch(`https://pspconnect.org/api/group/${user_id}`)
+    fetch(`https://pspconnect.org/api/group/`)
             .then(response => response.json())
             .then(data => {
               const groupCount = data.length;
