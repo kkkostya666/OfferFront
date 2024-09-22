@@ -413,41 +413,39 @@
             .then(response => response.json())
             .then(data => {
               const groupCount = data.length;
-              console.log(data)
-              offerContainer.innerHTML = '';
+              console.log(data);
 
+              // Проходим по каждому офферу из массива data
               data.forEach(offer => {
-                const offerElement = document.createElement('div');
-                offerElement.classList.add('Offer-info-container');
+                // Присваиваем значения из каждого элемента массива в переменные
+                const contact = offer.contact;
+                const createdAt = offer.created_at;
+                const cryptoAcceptance = offer.crypto_acceptance;
+                const depositOrKyc = offer.deposit_or_kyc;
+                const geoData = offer.geo_data;
+                const geoSolutionsInput = offer.geosolutionsinput;
+                const holdingAndRolling = offer.holding_and_rolling;
+                const id = offer.id;
+                const massViplati = offer.mass_viplati;
+                const offerTheme = offer.offer_theme;
+                const processingPrimaryTraffic = offer.processing_primary_traffic;
+                const project = offer.project;
+                const referralSystem = offer.referral_system;
+                const resseller = offer.resseler;
+                const status = offer.status;
+                const updatedAt = offer.updated_at;
+                const userId = offer.user_id;
+                const withdrawalDeadlines = offer.withdrawal_deadlines;
 
-                // Заголовок оффера
-                offerElement.innerHTML = `
-          <div class="Offer-info-title">
-            <p>Оффер #${offer.id}</p>
-            <a href="https://t.me/pspconnect" class="contact-with-us-offer">
-              <img src="./img/headphones.png" />Связаться
-            </a>
-          </div>
-          <div class="Offer-info">
-            <p class="gray">Тема оффера: ${offer.offer_theme}</p>
-            <p class="Offer-info-right">${offer.geo_coverage || 'ГЕО не указано'}</p>
-          </div>
-          <div class="Offer-info">
-            <p class="gray">Реферальная система: ${offer.referral_system}</p>
-            <p class="Offer-info-right">Криптовалюта: ${offer.crypto_acceptance}</p>
-          </div>
-          <div class="Offer-info-without-border">
-            <p class="gray">Тип трафика</p>
-            <p class="Offer-info-right">${offer.processing_primary_traffic}</p>
-          </div>
-        `;
-
-                // Добавляем созданный элемент в контейнер
-                offerContainer.appendChild(offerElement);
+                console.log(`
+                  Contact: ${contact}
+                  Created At: ${createdAt}
+                  Crypto Acceptance: ${cryptoAcceptance}
+                  Geo Data: ${geoData}
+                  Offer Theme: ${offerTheme}
+                  ...
+                `);
               });
-
-              // Вывести количество офферов
-              document.getElementById('offers-count').textContent = `Офферов: ${data.length}`;
             })
             .catch(error => console.error('Ошибка при загрузке данных:', error));
   </script>
