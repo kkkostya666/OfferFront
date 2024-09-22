@@ -373,7 +373,6 @@
           </div>
         `;
                     }
-
                     offerElement.innerHTML = `
         <div class="Offer-info-title">
           <p>Оффер #${offer.id}</p>
@@ -383,6 +382,8 @@
         </div>
         <div class="Offer-info">
           <p class="gray">ГЕО и решения: ${offer.geosolutionsinput || 'ГЕО не указано'}</p>
+           <div class="Offer-info">
+          <p class="gray">Проценты на каждый ГЕО</p>
           <div class="Offer-info-right">
             ${geoPercentsHtml}
           </div>
