@@ -353,49 +353,51 @@
                     const offerElement = document.createElement('div');
                     offerElement.classList.add('Offer-info-container');
 
-                    // Разделяем geo_data
-                    const geoData = offer.geo_data ? offer.geo_data.split(',') : [];
-                    const geoBlocks = geoData.map(geo => {
-                      const geoParts = geo.trim().split(' ');
+                    // Process the geo_data string
+                    const geoDataArray = offer.geo_data.split(' ');
+                    let geoPercentsHtml = '';
 
-                      // Парсим и разбираем данные (зависит от формата)
-                      const currency = geoParts[0]; // Валюта или GEO (например, Rub)
-                      const payIn = geoParts[geoParts.length - 2]; // PAY-IN процент
-                      const payOut = geoParts[geoParts.length - 1]; // PAY-OUT процент
+                    // Group every four elements (currency, type, PAY-IN, PAY-OUT)
+                    for (let i = 0; i < geoDataArray.length; i += 4) {
+                      const currency = geoDataArray[i];
+                      const type = geoDataArray[i + 1];
+                      const payIn = geoDataArray[i + 2];
+                      const payOut = geoDataArray[i + 3];
 
-                      return `
-                    <div class="geo-percents-offer">
-                        <p>${currency}</p>
-                        <p>PAY-IN - ${payIn || 'N/A'}%</p>
-                        <p>PAY-OUT - ${payOut || 'N/A'}%</p>
-                    </div>
-                `;
-                    }).join(''); // Объединяем массив блоков в строку
+                      geoPercentsHtml += `
+          <div class="geo-percents-offer">
+            <p>${currency}</p>
+            <p>${type}</p>
+            <p>PAY-IN: ${payIn}%</p>
+            <p>PAY-OUT: ${payOut}%</p>
+          </div>
+        `;
+                    }
 
                     offerElement.innerHTML = `
-                <div class="Offer-info-title">
-                    <p>Оффер #${offer.id}</p>
-                    <a href="https://t.me/pspconnect" class="contact-with-us-offer">
-                        <img src="./img/headphones.png" />Связаться
-                    </a>
-                </div>
-                <div class="Offer-info">
-                    <p class="gray">ГЕО и решения: ${offer.geosolutionsinput || 'ГЕО не указано'}</p>
-                </div>
-                <div class="Offer-info">
-                    <p class="gray">Проценты на каждый ГЕО</p>
-                    <div class="Offer-info-right">
-                        ${geoBlocks} <!-- Вставляем динамически созданные блоки -->
-                    </div>
-                </div>
-                <div class="Offer-info-without-border">
-                    <p class="gray">Какие проекты подключаете</p>
-                    <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
-                </div>
-            `;
+        <div class="Offer-info-title">
+          <p>Оффер #${offer.id}</p>
+          <a href="https://t.me/pspconnect" class="contact-with-us-offer">
+            <img src="./img/headphones.png" />Связаться
+          </a>
+        </div>
+        <div class="Offer-info">
+          <p class="gray">ГЕО и решения: ${offer.geosolutionsinput || 'ГЕО не указано'}</p>
+          <div class="Offer-info-right">
+            ${geoPercentsHtml}
+          </div>
+        </div>
+        <div class="Offer-info-without-border">
+          <p class="gray">Какие проекты подключаете</p>
+          <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
+        </div>
+      `;
 
                     offerContainer.appendChild(offerElement);
                   });
+
+                  // Display the number of offers
+                  document.getElementById('offers-count').textContent = `Офферов: ${data.length}`;
                 })
                 .catch(error => console.error('Ошибка при загрузке данных:', error));
       </script>
