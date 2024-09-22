@@ -407,17 +407,26 @@
   <script>
     const tg = window.Telegram.WebApp;
     const user = tg.initDataUnsafe.user.username;
-    console.log(user)
+    console.log(user);
     document.getElementById('username').textContent = user;
+
     fetch(`https://pspconnect.org/api/group/`)
             .then(response => response.json())
-            .then(data => {
+            .then(responseData => {
+              // Теперь мы обращаемся к responseData.data, чтобы получить массив
+              const data = responseData.data;
+
+              // Проверяем, является ли data массивом
+              if (!Array.isArray(data)) {
+                console.error('Ожидается массив данных, получен другой формат:', data);
+                return;
+              }
+
               const groupCount = data.length;
               console.log(data);
 
-              // Проходим по каждому офферу из массива data
+              // Проходим по каждому офферу
               data.forEach(offer => {
-                // Присваиваем значения из каждого элемента массива в переменные
                 const contact = offer.contact;
                 const createdAt = offer.created_at;
                 const cryptoAcceptance = offer.crypto_acceptance;
@@ -437,17 +446,20 @@
                 const userId = offer.user_id;
                 const withdrawalDeadlines = offer.withdrawal_deadlines;
 
+                // Вывод данных в консоль
                 console.log(`
                   Contact: ${contact}
                   Created At: ${createdAt}
-                  Crypto Acceptance: ${cryptoAcceptance}
-                  Geo Data: ${geoData}
                   Offer Theme: ${offerTheme}
                   ...
                 `);
               });
+
+              // Вывести количество офферов
+              document.getElementById('offers-count').textContent = `Офферов: ${groupCount}`;
             })
             .catch(error => console.error('Ошибка при загрузке данных:', error));
   </script>
+
   </body>
 </html>
