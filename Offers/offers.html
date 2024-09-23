@@ -397,6 +397,17 @@
           <p class="gray">Какие проекты подключаете</p>
           <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
         </div>
+         <button class="details-btn" onclick="toggleDetails(${offer.id})">Подробнее</button>
+        <div id="details-${offer.id}" class="Offer-details" style="display: none;">
+          <p><strong>Контакт:</strong> ${offer.contact || 'Не указано'}</p>
+          <p><strong>Проект:</strong> ${offer.project || 'Не указано'}</p>
+          <p><strong>Тематика:</strong> ${offer.offer_theme || 'Не указано'}</p>
+          <p><strong>Крипто:</strong> ${offer.crypto_acceptance || 'Не указано'}</p>
+          <p><strong>Реферальная система:</strong> ${offer.referral_system || 'Не указано'}</p>
+          <p><strong>Депозиты/КYC:</strong> ${offer.deposit_or_kyc || 'Не указано'}</p>
+          <p><strong>Создано:</strong> ${new Date(offer.created_at).toLocaleDateString()}</p>
+          <p><strong>Обновлено:</strong> ${new Date(offer.updated_at).toLocaleDateString()}</p>
+        </div>
       `;
 
                     offerContainer.appendChild(offerElement);
@@ -404,6 +415,13 @@
 
                 })
                 .catch(error => console.error('Ошибка при загрузке данных:', error));
+        function toggleDetails(offerId) {
+          const detailsElement = document.getElementById(`details-${offerId}`);
+          if (detailsElement.style.display === 'none') {
+            detailsElement.style.display = 'block';
+          } else {
+            detailsElement.style.display = 'none';
+          }
       </script>
   </div>
   </body>
