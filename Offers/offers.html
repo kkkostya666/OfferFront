@@ -398,10 +398,10 @@
           <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
         </div>
          <button class="details-btn" onclick="toggleDetails(${offer.id})">Подробнее</button>
-        <div id="details-${offer.id}" class="Offer-details" style="display: none;">
+        <div id="details-${offer.id}" class="Offer-info"" style="display: none;">
             <p class="Offer-info-right">Реферальная система: ${offer.referral_system || 'Не указано'}</p>
             <p class="Offer-info-right">Принятие криптовалюты: ${offer.crypto_acceptance || 'Не указано'}</p>
-            <p class="Offer-info-right">Обработка первичного трафика:$ {offer.processing_primary_traffic || 'Не указано'}</p>
+            <p class="Offer-info-right">Обработка первичного трафика: ${offer.processing_primary_traffic || 'Не указано'}</p>
             <p class="Offer-info-right">Холдинг и Роллинг средств для мерчантов: ${offer.holding_and_rolling || 'Не указано'}</p>
             <p class="Offer-info-right">Сроки вывода средств: ${formatWithdrawalDeadline(offer.withdrawal_deadlines) || 'Не указано'}</p>
             <p class="Offer-info-right">Депозиты/КYC: ${offer.deposit_or_kyc || 'Не указано'}</p>
@@ -425,7 +425,9 @@
           }
         }
         function formatWithdrawalDeadline(deadline) {
-          switch (deadline) {
+          const normalizedDeadline = deadline.trim().toUpperCase();
+
+          switch (normalizedDeadline) {
             case 'T+0':
               return 'в этот же день';
             case 'T+1':
