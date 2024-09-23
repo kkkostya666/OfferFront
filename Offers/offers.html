@@ -263,6 +263,22 @@
         font-size: 12px;
         color: rgba(0, 0, 0, 0.35);
       }
+      .details-btn {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px; /* Добавлено пространство для кнопки */
+        margin: 0 auto; /* Центрирование кнопки по горизонтали */
+        color: blue;
+        text-decoration: underline;
+        display: block; /* Кнопка будет занимать всю ширину родителя */
+        text-align: center; /* Центрирование текста по горизонтали */
+      }
+
+      .details-btn:focus {
+        outline: none;
+      }
     </style>
   </head>
   <body>
@@ -308,24 +324,23 @@
     <div class="bottom-menu">
       <a href="../Vacancies/Vacancies.html" class="bottom-menu-item">
         <img src="../img/vacancies-bottom-menu.png" />
-        <p>Ищу</p>
-        <p>вакансии</p>
-      </a>
+        <p>Вакансии</p>
+]      </a>
       <a href="./offers.html" class="bottom-menu-item">
         <img src="../img/offers-bot-menu.png" />
         <p style="color: rgb(0, 153, 255)">
-          Офферы для
+          Офферы
         </p>
-        <p style="color: rgb(0, 153, 255)">Трейдеров</p>
+        <p style="color: rgb(0, 153, 255)">Платежек</p>
       </a>
       <a href="../PaySolutions/PaySolutions.html" class="bottom-menu-item">
         <img src="../img/paysolution-bot-menu.png" />
-        <p>Ищу платёжное</p>
+        <p>Платёжное</p>
         <p>решение</p>
       </a>
       <a href="../Profile/Profile.html" class="bottom-menu-item">
         <img src="../img/profile-avatar-bot-menu.png" />
-        <p style="margin-bottom: 7px">Профиль</p>
+        <p style="margin-bottom: 7px">Офферы от трейдеров</p>
       </a>
     </div>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -350,6 +365,9 @@
                   offerContainer.innerHTML = '';
 
                   data.forEach(offer => {
+                    if (offer.status !== 'CONFIRMED') {
+                      return;
+                    }
                     const offerElement = document.createElement('div');
                     offerElement.classList.add('Offer-info-container');
 
