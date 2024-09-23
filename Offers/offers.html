@@ -399,14 +399,15 @@
         </div>
          <button class="details-btn" onclick="toggleDetails(${offer.id})">Подробнее</button>
         <div id="details-${offer.id}" class="Offer-details" style="display: none;">
-          <p><strong>Контакт:</strong> ${offer.contact || 'Не указано'}</p>
-          <p><strong>Проект:</strong> ${offer.project || 'Не указано'}</p>
-          <p><strong>Тематика:</strong> ${offer.offer_theme || 'Не указано'}</p>
-          <p><strong>Крипто:</strong> ${offer.crypto_acceptance || 'Не указано'}</p>
-          <p><strong>Реферальная система:</strong> ${offer.referral_system || 'Не указано'}</p>
-          <p><strong>Депозиты/КYC:</strong> ${offer.deposit_or_kyc || 'Не указано'}</p>
-          <p><strong>Создано:</strong> ${new Date(offer.created_at).toLocaleDateString()}</p>
-          <p><strong>Обновлено:</strong> ${new Date(offer.updated_at).toLocaleDateString()}</p>
+            <p class="Offer-info-right">Реферальная система: ${offer.referral_system || 'Не указано'}</p>
+            <p class="Offer-info-right">Принятие криптовалюты: ${offer.crypto_acceptance || 'Не указано'}</p>
+            <p class="Offer-info-right">Обработка первичного трафика:$ {offer.processing_primary_traffic || 'Не указано'}</p>
+            <p class="Offer-info-right">Холдинг и Роллинг средств для мерчантов: ${offer.holding_and_rolling || 'Не указано'}</p>
+            <p class="Offer-info-right">Сроки вывода средств: ${formatWithdrawalDeadline(offer.withdrawal_deadlines) || 'Не указано'}</p>
+            <p class="Offer-info-right">Депозиты/КYC: ${offer.deposit_or_kyc || 'Не указано'}</p>
+            <p class="Offer-info-right">Масс.Выплаты USDT: ${offer.mass_viplati || 'Не указано'}</p>
+            <p class="Offer-info-right">Работа с ресселерами: ${offer.resseler || 'Не указано'}</p>
+            <p class="Offer-info-right">Создано: ${new Date(offer.created_at).toLocaleDateString()}</p>
         </div>
       `;
 
@@ -421,6 +422,28 @@
             detailsElement.style.display = 'block';
           } else {
             detailsElement.style.display = 'none';
+          }
+        }
+        function formatWithdrawalDeadline(deadline) {
+          switch (deadline) {
+            case 'T+0':
+              return 'в этот же день';
+            case 'T+1':
+              return 'через день';
+            case 'T+2':
+              return 'через 2 дня';
+            case 'T+3':
+              return 'через 3 дня';
+            case 'T+4':
+              return 'через 4 дня';
+            case 'T+5':
+              return 'через 5 дней';
+            case 'T+6':
+              return 'через 6 дней';
+            case 'T+7':
+              return 'через 7 дней';
+            default:
+              return deadline;
           }
         }
       </script>
