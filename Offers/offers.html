@@ -393,20 +393,20 @@
           </div>
         </div>
 
-        <div class="Offer-info-without-border">
+        <div class="Offer-info">
           <p class="gray">Какие проекты подключаете</p>
           <p class="Offer-info-right">${offer.offer_theme || 'Данные не указаны'}</p>
         </div>
          <button class="details-btn" onclick="toggleDetails(${offer.id})">Подробнее</button>
         <div id="details-${offer.id}" class="Offer-info"" style="display: none;">
-            <p class="Offer-info-right">Реферальная система: ${offer.referral_system || 'Не указано'}</p>
-            <p class="Offer-info-right">Принятие криптовалюты: ${offer.crypto_acceptance || 'Не указано'}</p>
-            <p class="Offer-info-right">Обработка первичного трафика: ${offer.processing_primary_traffic || 'Не указано'}</p>
-            <p class="Offer-info-right">Холдинг и Роллинг средств для мерчантов: ${offer.holding_and_rolling || 'Не указано'}</p>
+            <p class="Offer-info-right">Реферальная система: ${translateYesNo(offer.referral_system)}</p>
+            <p class="Offer-info-right">Принятие криптовалюты: ${translateYesNo(offer.crypto_acceptance)}</p>
+            <p class="Offer-info-right">Обработка первичного трафика: ${translateYesNo(offer.processing_primary_traffic)}</p>
+            <p class="Offer-info-right">Холдинг и Роллинг средств для мерчантов: ${translateYesNo(offer.holding_and_rolling)}</p>
             <p class="Offer-info-right">Сроки вывода средств: ${formatWithdrawalDeadline(offer.withdrawal_deadlines) || 'Не указано'}</p>
-            <p class="Offer-info-right">Депозиты/КYC: ${offer.deposit_or_kyc || 'Не указано'}</p>
-            <p class="Offer-info-right">Масс.Выплаты USDT: ${offer.mass_viplati || 'Не указано'}</p>
-            <p class="Offer-info-right">Работа с ресселерами: ${offer.resseler || 'Не указано'}</p>
+            <p class="Offer-info-right">Депозиты/KYC: ${translateYesNo(offer.deposit_or_kyc)}</p>
+            <p class="Offer-info-right">Масс.Выплаты USDT: ${translateYesNo(offer.mass_viplati)}</p>
+            <p class="Offer-info-right">Работа с ресселерами: ${translateYesNo(offer.resseler)}</p>
             <p class="Offer-info-right">Создано: ${new Date(offer.created_at).toLocaleDateString()}</p>
         </div>
       `;
@@ -424,30 +424,43 @@
             detailsElement.style.display = 'none';
           }
         }
+
         function formatWithdrawalDeadline(deadline) {
           const normalizedDeadline = deadline.trim().toUpperCase();
 
           switch (normalizedDeadline) {
-            case 'T+0':
+            case 'Т+0':
               return 'в этот же день';
-            case 'T+1':
-              return 'через день';
-            case 'T+2':
+            case 'Т+1':
+              return 'через 1 день';
+            case 'Т+2':
               return 'через 2 дня';
-            case 'T+3':
+            case 'Т+3':
               return 'через 3 дня';
-            case 'T+4':
+            case 'Т+4':
               return 'через 4 дня';
-            case 'T+5':
+            case 'Т+5':
               return 'через 5 дней';
-            case 'T+6':
+            case 'Т+6':
               return 'через 6 дней';
-            case 'T+7':
-              return 'через 7 дней';
+            case 'Т+7':
+              return 'через неделю';
             default:
               return deadline;
           }
         }
+        function translateYesNo(value) {
+          const normalizedValue = value.trim().toLowerCase();
+
+          if (normalizedValue === 'yes' || normalizedValue === 'да') {
+            return 'Да';
+          } else if (normalizedValue === 'no' || normalizedValue === 'нет') {
+            return 'Нет';
+          } else {
+            return value; // Возвращаем оригинальное значение, если оно не "yes"/"no"
+          }
+        }
+
       </script>
   </div>
   </body>
