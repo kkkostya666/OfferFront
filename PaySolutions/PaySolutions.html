@@ -12,28 +12,222 @@
       @font-face {
         font-family: sf-pro-display;
         src: url("../fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF")
-          format("opentype");
+        format("opentype");
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .gray {
+        color: rgba(0, 0, 0, 0.5);
       }
 
       body {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         background: linear-gradient(
-            195.21deg,
-            #ffffff 0%,
-            #e0fff9 29%,
-            #ccf8f1 36.5%,
-            #efeff4 64%,
-            #e9f2fe 88%,
-            #dfedff 100%
-          )
-          no-repeat center center fixed;
+                195.21deg,
+                #ffffff 0%,
+                #e0fff9 29%,
+                #ccf8f1 36.5%,
+                #efeff4 64%,
+                #e9f2fe 88%,
+                #dfedff 100%
+        )
+        no-repeat center center fixed;
         background-size: cover;
         font-family: sf-pro-display;
         margin: 0;
         cursor: default;
+      }
+
+      .account-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100vw;
+        margin-right: 30px;
+      }
+
+      .avatar-container {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+        margin-top: 8px;
+      }
+
+      .acc-data {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .offers-count {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 12px;
+      }
+
+      .Offers-Page-titles-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 30px;
+      }
+
+      .Offers-Page-title {
+        color: black;
+        margin: 0;
+        font-size: 34px;
+      }
+
+      .Offers-Page-undertitle {
+        color: black;
+        font-size: 13px;
+        margin: 0;
+        font-weight: normal;
+      }
+
+      .Offers-Page-mainInfo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 360px;
+        width: 100%;
+      }
+
+      .Offers-Page-helpButtons-container {
+        display: flex;
+        gap: 5px;
+        margin-top: 50px;
+      }
+
+      .Offers-Page-helpButton {
+        width: 10px;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 1);
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.07);
+        transition: all 0.5s ease;
+        text-decoration: none;
+        color: black;
+      }
+
+      .Offers-Page-helpButton:hover {
+        background: rgba(0, 122, 255, 1);
+        color: #ffffff;
+      }
+
+      .Offers-Page-helpButton:active {
+        background: rgb(42, 145, 255);
+      }
+
+      .Offer-info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90vw;
+        background-color: rgba(255, 255, 255, 1);
+        margin-top: 20px;
+        border-radius: 15px;
+        gap: 10px;
+        box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.07);
+      }
+
+      .geo-percents-offer {
+        font-size: 15px;
+      }
+
+      .Offer-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        gap: 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .Offer-info-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        gap: 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+      }
+
+      .Offer-info-without-border {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+      }
+
+      .Offer-info-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 160px;
+      }
+
+      .switch-page-btns-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 40px;
+        font-size: 11px;
+        margin-bottom: 80px;
+      }
+
+      .switch-page-btn {
+        background: rgba(255, 255, 255, 1);
+        padding: 10px 13px 10px 13px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: black;
+        text-decoration: none;
+      }
+
+      .switch-page-btn-active {
+        background: rgba(0, 122, 255, 1);
+        padding: 10px 13px 10px 13px;
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 1);
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .switch-page-reduction {
+        background: rgba(255, 255, 255, 1);
+        padding: 10px 13px 10px 13px;
+        border-radius: 10px;
+      }
+
+      @media screen and (max-width: 350px) {
+        .Offer-info-container p {
+          font-size: 12px;
+        }
+      }
+
+      #offer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Выровнять офферы по центру */
+      }
+
+      .contact-with-us-offer {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        color: rgba(1, 122, 253, 1);
+        cursor: pointer;
+        text-decoration: none;
       }
 
       .bottom-menu {
@@ -68,7 +262,22 @@
         max-width: 90px;
         font-size: 12px;
         color: rgba(0, 0, 0, 0.35);
-        margin: 0;
+      }
+      .details-btn {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px; /* Добавлено пространство для кнопки */
+        margin: 0 auto; /* Центрирование кнопки по горизонтали */
+        color: blue;
+        text-decoration: underline;
+        display: block; /* Кнопка будет занимать всю ширину родителя */
+        text-align: center; /* Центрирование текста по горизонтали */
+      }
+
+      .details-btn:focus {
+        outline: none;
       }
     </style>
   </head>
