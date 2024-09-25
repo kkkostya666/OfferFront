@@ -445,8 +445,8 @@
       <div class="avatar-container">
         <img src="./img/avatar.png" />
         <div class="acc-data">
-          <p class="acc-name">RenatGen</p>
-          <p class="offers-count">Офферов: 3</p>
+          <p id="username"></p>
+          <p class="offers-count"></p>
         </div>
       </div>
     </div>
@@ -628,6 +628,8 @@
     <script>
       let tg = window.Telegram.WebApp;
       console.log(tg)
+      const user = tg.initDataUnsafe.user.username;
+      document.getElementById('username').textContent = user;
       let next_arrow = document.getElementById("next-arrow");
 
       next_arrow.addEventListener("click", (event) => {
