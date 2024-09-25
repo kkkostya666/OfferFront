@@ -611,27 +611,17 @@
         </button>
       </div>
     </section>
-    <div class="bottom-menu">
-      <a href="../Vacancies/Vacancies.html" class="bottom-menu-item">
-        <img src="../img/vacancies-bottom-menu.png" />
-        <p>Ищу</p>
-        <p>вакансии</p>
-      </a>
-      <a href="../Offers/offers.html" class="bottom-menu-item">
-        <img src="../img/offers-bot-menu.png" />
-        <p>Офферы для</p>
-        <p>Трейдеров</p>
-      </a>
-      <a href="../PaySolutions/PaySolutions.html" class="bottom-menu-item">
-        <img src="../img/paysolution-bot-menu.png" />
-        <p>Ищу платёжное</p>
-        <p>решение</p>
-      </a>
-      <a href="../Profile/Profile.html" class="bottom-menu-item">
-        <img src="../img/profile-avatar-bot-menu.png" />
-        <p style="margin-bottom: 7px">Профиль</p>
-      </a>
-    </div>
+    <div id="bottom-menu-container"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("../templates/bottom-menu.html")
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById("bottom-menu-container").innerHTML = data;
+                });
+      });
+    </script>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
